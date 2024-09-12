@@ -14,14 +14,14 @@ $M = \(Q, \Sigma, \Gamma, \delta, q_0, Z, F\)$, kjer je
 - $Q$ množica stanj,
 - $\Sigma$ končna množica, imenovana vhodna abeceda,
 - $\Gamma$ končna množica, imenovana abeceda sklada,
-- $\delta$ končna podmnožica $Q \times \Sigma \times \Gamma \to Q \times \Gamma*$, prehodna relacija,
+- $\delta$ končna podmnožica $Q \times \Sigma \times \Gamma \to Q \times \Gamma^{*}$, prehodna relacija,
 - $q_0 \in Q$ začetno stanje,
 - $Z \in Γ$ začetni simbol sklada,
 - $F \subseteq Q$ množica sprejemnih stanj.
 
 Za naš primer je potreben le $5$-elementni nabor, saj je na začetku sklad prazen, abecedi pa se med seboj ujemata. Elementi nabora so torej
 - $Q = \{\text{zacetno, sprejemno, napaka}\}$,
-- $\Sigma = \{ (, ), \{, \}, [, ] \} = \Gamma$
+- $\Sigma = \{ (, ), \\{, \\}, [, ] \} = \Gamma$
 - $q_0 = \text{zacetno}$,
 - $F = \text{sprejemno}$,
 
