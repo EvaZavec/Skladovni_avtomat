@@ -9,7 +9,7 @@ V našem primeru uporabljamo skladovni avtomat za preverjanje pravilnosti gnezde
 
 Skladovni avtomat je formalno definiran kot $7$-elemntni nabor:
 
-$ M = (Q, Σ, Γ, δ, q0, Z, F) $, kjer je 
+$M = \(Q, \Sigma, \Gamma, \delta, q_0, Z, F\)$, kjer je 
 
 - $Q$ množica stanj,
 - $\Sigma$ končna množica, imenovana vhodna abeceda,
@@ -20,12 +20,12 @@ $ M = (Q, Σ, Γ, δ, q0, Z, F) $, kjer je
 - $F \subseteq Q$ množica sprejemnih stanj.
 
 Za naš primer je potreben le $5$-elementni nabor, saj je na začetku sklad prazen, abecedi pa se med seboj ujemata. Elementi nabora so torej
-- $Q = \{začetno, sprejemno, napaka\}$,
-- $\Sigma = \{ (, ), \{, \}, \[,\] \} = \Gamma $
-- $ q_0 =$ začetno,
-- $ F = sprejemno $,
+- $Q = \{\text{zacetno, sprejemno, napaka}\}$,
+- $\Sigma = \{ (, ), \{, \}, [, ] \} = \Gamma$
+- $q_0 = \text{zacetno}$,
+- $F = \text{sprejemno}$,
 
-in pa $\delta$, ki ima veliko prehodov. Za začetno stanje privzamemo, da je sklad prazen, zato lahko preide le v sprejemno stanje ali napako, glede na naslednji simbol v nizu. Ko je trenutno stanje avtomata napaka, bo ne glede na nadaljevanje niza in elemente v skladu  ostal v tem stanju, zato ne potrebujemo definirati prehodov. Za sprejemno stanje pa pogledamo vsako kombinacijo simbola v nizu in simbola na vrhu sklada. Ko je trenutni simbol v nizu oklepaj, ga dodamo na sklad in stanja ne spreminjamo. Ko pa je trenutni znak zaklepaj, preverimo, če je na vrhu sklada njegov oklepaj, in v tem primeru ostanemo v sprejemnem stanju ter hkrati iz vrha sklada vzamemo ta oklepaj. Če je na vrhu sklada drug simbol ali pa je sklad prazen, avtomat preide v stanje napaka.
+in pa $\delta$, ki ima veliko elementov, saj je veliko prehodov. Za začetno stanje privzamemo, da je sklad prazen, zato lahko preide le v sprejemno stanje ali napako, glede na naslednji simbol v nizu. Ko je trenutno stanje avtomata napaka, bo ne glede na nadaljevanje niza in elemente v skladu  ostal v tem stanju, zato ne potrebujemo definirati prehodov. Za sprejemno stanje pa pogledamo vsako kombinacijo simbola v nizu in simbola na vrhu sklada. Ko je trenutni simbol v nizu oklepaj, ga dodamo na sklad in stanja ne spreminjamo. Ko pa je trenutni znak zaklepaj, preverimo, če je na vrhu sklada njegov oklepaj, in v tem primeru ostanemo v sprejemnem stanju ter hkrati iz vrha sklada vzamemo ta oklepaj. Če je na vrhu sklada drug simbol ali pa je sklad prazen, avtomat preide v stanje napaka.
 
 
 ## Navodila za uporabo
@@ -62,7 +62,7 @@ V drugi mapi `tekstovniVmesnik`, se nahaja le ena datoteka in sicer `tekstovniVm
 V datoteki so definirani tip avtomata, prazen avtomat in funkcije za dodajanje sprejemnih stanj, nesprejemnih stanj in prehodov. S prehodno funkcijo poiščemo prehod, ki ustreza trenutnemu stanju avtomata, trenutnemu simbolu in vrhu sklada. V datoteki so implementirane tudi funkcije, ki nam izpišejo začetno stanje, seznam vseh stanj in seznam vseh prehodov, pa tudi funkcija, ki preveri če je stanje eno izmed sprejemnih. 
 Vse te funkcije so zbrane v dveh glavnih funkcijah: `gnezdenje_oklepajev`, ki ustvari tri stanja za naš avtomat in doda prehode med njimi, 
 
-in `preberi_niz`, ki se s pomočjo prehodne funkcije sprehodi čez niz in pomika po ustreznih stanjih, vrne pa stanje in sklad ob zaključku kot option.
+in `preberi_niz`, ki se s pomočjo prehodne funkcije sprehodi čez niz in pomika po ustreznih stanjih, vrne pa stanje in sklad ob zaključku kot `option`.
 
 ### `sklad.ml`
 
@@ -92,5 +92,5 @@ Tekstovni vmesnik se lahko nahaja v $6$ različnih stanjih, med katerimi prehaja
 - `BranjeNiza`: Preberemo niz in s pomočjo sporočila `PreberiNiz` preidemo bodisi v stanje `OpozoriloONapacnem` nizu, ce je niz neustrezen, bodisi v stanje `RezultatNiza`.
 - `RezultatPrebranegaNiza`: Izpiše se, ali ima niz pravilno gnezdene oklepaje ali ne, nato pa se vmesnik vrne v stanje `SeznamMoznosti`.
 - `OpozoriloONapacnemNizu`: V to stanje pridemo, če je uporabnik vpisal niz, ki ni bil zgolj iz oklepajev, zato uporabnika opozorimo na napako in mu damo ponovno možnost za vnos niza s prehodom na stanje BranjeNiza.
-- `Izhod`: Vmesnik se nahaja v tem stanju, če je uporabnik izbral možnost Izhod. V tem primeru se od njega poslovimo in zaključimo s programom. 
+- `Izhod`: Vmesnik se nahaja v tem stanju, če je uporabnik izbral možnost izhod. V tem primeru se od njega poslovimo in zaključimo s programom. 
 
