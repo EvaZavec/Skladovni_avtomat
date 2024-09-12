@@ -1,1 +1,0 @@
-src/definicije/sklad.ml:
