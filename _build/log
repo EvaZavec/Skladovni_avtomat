@@ -1,9 +1,9 @@
-# dune exe tekstovniVmesnik
+# dune exec ./tekstovniVmesnik.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Workspace root: /workspaces/Skladovni_avtomat
 # Auto-detected concurrency: 8
-$ /home/opam/.opam/4.14/bin/ocamlc.opt -config > /tmp/dune_a754de_output
+$ /home/opam/.opam/4.14/bin/ocamlc.opt -config > /tmp/dune_fd589a_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"

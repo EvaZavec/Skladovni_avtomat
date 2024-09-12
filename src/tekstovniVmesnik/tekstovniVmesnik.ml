@@ -12,6 +12,7 @@ type stanje_vmesnika =
 type model = {
   avtomat : Avtomat.t;
   stanje_avtomata : Stanje.t;
+  stanje_sklada : Sklad.t;
   stanje_vmesnika : stanje_vmesnika;
 }
 
@@ -22,12 +23,16 @@ type msg =
 
 let update model = function
   | PreberiNiz str -> (
+      if str = "" then
+        { model with stanje_vmesnika = OpozoriloONapacnemNizu }
+      else
       match Avtomat.preberi_niz model.avtomat model.stanje_avtomata str with
       | None -> { model with stanje_vmesnika = OpozoriloONapacnemNizu }
-      | Some (stanje_avtomata) ->
+      | Some (stanje_avtomata, stanje_sklada) ->
           {
             model with
             stanje_avtomata;
+            stanje_sklada;
             stanje_vmesnika = RezultatPrebranegaNiza;
           })
   | ZamenjajVmesnik stanje_vmesnika -> { model with stanje_vmesnika }
@@ -60,14 +65,14 @@ let izpisi_avtomat avtomat =
   List.iter izpisi_stanje (Avtomat.seznam_stanj avtomat)
 
 let beri_niz () =
-  print_string "Vnesi niz > ";
+  print_string "Vnesi niz oklepajev > ";
   let str = read_line () in
   PreberiNiz str
 
 let izpisi_rezultat model =
-  if Avtomat.je_sprejemno_stanje model.avtomat model.stanje_avtomata then
-    print_endline "Niz je bil sprejet"
-  else print_endline "Niz ni bil sprejet"
+  if Avtomat.je_sprejemno_stanje model.avtomat model.stanje_avtomata && Sklad.sklad_je_prazen model.stanje_sklada then
+    print_endline "Oklepaji so gnezdeni pravilno."
+  else print_endline "Oklepaji so gnezdeni napačno."
 
 let view model =
   match model.stanje_vmesnika with
@@ -80,14 +85,15 @@ let view model =
       izpisi_rezultat model;
       ZamenjajVmesnik SeznamMoznosti
   | OpozoriloONapacnemNizu ->
-      print_endline "Niz ni veljaven";
-      ZamenjajVmesnik SeznamMoznosti
+      print_endline "To ni niz oklepajev! Poskusi še enkrat.";
+      ZamenjajVmesnik BranjeNiza
   | Izhod -> Izhod
 
 let init avtomat =
   {
     avtomat;
     stanje_avtomata = Avtomat.zacetno_stanje avtomat;
+    stanje_sklada = Sklad.prazen_sklad;
     stanje_vmesnika = SeznamMoznosti;
   }
 

@@ -50,7 +50,7 @@ let oklepaji =
   let zacetno = Stanje.iz_niza "Zacetno"
   and sprejemno = Stanje.iz_niza "Sprejemno" 
   and napaka = Stanje.iz_niza "Napaka" in
-  prazen_avtomat sprejemno 
+  prazen_avtomat zacetno 
   |> dodaj_sprejemno_stanje sprejemno
   |> dodaj_nesprejemno_stanje napaka 
 
@@ -98,6 +98,3 @@ let preberi_niz avtomat q niz =
     | Some (q, sklad) -> prehodna_funkcija avtomat q znak sklad
   in
   niz |> String.to_seq |> Seq.fold_left aux (Some (q, Sklad.prazen_sklad))
-  |> function
-    | Some (q, sklad) -> if Sklad.sklad_je_prazen sklad && je_sprejemno_stanje avtomat q then Some q else None
-    | None -> None
