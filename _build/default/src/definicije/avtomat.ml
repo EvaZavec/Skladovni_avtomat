@@ -46,7 +46,7 @@ let seznam_prehodov avtomat = avtomat.prehodi
 let je_sprejemno_stanje avtomat stanje =
   List.mem stanje avtomat.sprejemna_stanja
 
-let oklepaji =
+let gnezdenje_oklepajev =
   let zacetno = Stanje.iz_niza "Zacetno"
   and sprejemno = Stanje.iz_niza "Sprejemno" 
   and napaka = Stanje.iz_niza "Napaka" in

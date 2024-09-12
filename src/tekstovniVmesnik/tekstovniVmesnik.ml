@@ -105,5 +105,5 @@ let rec loop model =
       loop model'
 
 let _ =
-  let avtomat = oklepaji in
+  let avtomat = gnezdenje_oklepajev in
   loop (init avtomat)

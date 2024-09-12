@@ -9,5 +9,5 @@ val zacetno_stanje : t -> Stanje.t
 val seznam_stanj : t -> Stanje.t list
 val seznam_prehodov : t -> (Stanje.t * char * char option * Stanje.t * (Sklad.t -> Sklad.t)) list
 val je_sprejemno_stanje : t -> Stanje.t -> bool
-val oklepaji : t
+val gnezdenje_oklepajev : t
 val preberi_niz : t -> Stanje.t -> string -> (Stanje.t * Sklad.t) option
